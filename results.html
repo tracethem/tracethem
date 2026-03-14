@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Results | TraceThem</title>
+<style>
+body{
+  background:#0b0b0d;
+  color:white;
+  font-family:Arial;
+  margin:0;
+  padding:60px 20px;
+}
+.wrap{
+  max-width:900px;
+  margin:0 auto;
+}
+h1{
+  text-align:center;
+}
+.sub{
+  text-align:center;
+  color:#b8bfcb;
+  margin-bottom:30px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:18px;
+  margin-top:25px;
+}
+.card{
+  background:#14161b;
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:14px;
+  padding:20px;
+}
+.card h3{
+  margin-top:0;
+}
+.card p{
+  color:#c3c9d3;
+}
+.note{
+  margin-top:28px;
+  background:#14161b;
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:14px;
+  padding:20px;
+  color:#b8bfcb;
+}
+.btn{
+  display:inline-block;
+  margin-top:20px;
+  background:#4ea3ff;
+  color:white;
+  text-decoration:none;
+  padding:14px 20px;
+  border-radius:10px;
+  font-weight:700;
+}
+.center{
+  text-align:center;
+}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Public-source signals found</h1>
+    <p class="sub">This demo shows the kinds of public digital footprint indicators a lookup tool could organize.</p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Possible Profile Matches</h3>
+        <p>Public-facing profiles or identifiers may be associated with the searched value.</p>
+      </div>
+
+      <div class="card">
+        <h3>Username Reuse</h3>
+        <p>Similar handles can appear across multiple public platforms and websites.</p>
+      </div>
+
+      <div class="card">
+        <h3>Public Mentions</h3>
+        <p>An email, number, or username may appear in public pages, bios, or searchable listings.</p>
+      </div>
+
+      <div class="card">
+        <h3>Digital Footprint Summary</h3>
+        <p>Results should be reviewed carefully and verified against original public sources.</p>
+      </div>
+    </div>
+
+    <div class="note">
+      This is a public-source demo page only. It does not prove identity, behavior, intent, or relationship activity.
+    </div>
+
+    <div class="center">
+      <a class="btn" href="index.html">Run Another Search</a>
+    </div>
+  </div>
+</body>
+</html>
