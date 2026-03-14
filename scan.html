@@ -42,8 +42,7 @@ function nextStep(){
     setTimeout(nextStep, 1600);
   } else {
     setTimeout(() => {
-      window.location.href = "results.html";
-    }, 1200);
+      window.location = `results.html?type=${encodeURIComponent(type)}&query=${encodeURIComponent(query)}`
   }
 }
 
