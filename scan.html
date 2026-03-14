@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Scanning...</title>
+<style>
+body{
+background:#0b0b0d;
+color:white;
+font-family:Arial;
+text-align:center;
+padding-top:120px;
+}
+#status{
+font-size:24px;
+margin-top:40px;
+color:#4ea3ff;
+}
+</style>
+</head>
+<body>
+
+<h1>Running public-source scan...</h1>
+<div id="status">Initializing search...</div>
+
+<script>
+let steps = [
+  "Searching public sources...",
+  "Scanning social platforms...",
+  "Checking username reuse...",
+  "Reviewing public records...",
+  "Matching profile signals...",
+  "Signals detected"
+];
+
+let i = 0;
+
+function nextStep(){
+  document.getElementById("status").innerText = steps[i];
+  i++;
+
+  if(i < steps.length){
+    setTimeout(nextStep, 1600);
+  } else {
+    setTimeout(() => {
+      window.location.href = "results.html";
+    }, 1200);
+  }
+}
+
+setTimeout(nextStep, 1200);
+</script>
+
+</body>
+</html>
