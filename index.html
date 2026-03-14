@@ -1,73 +1,164 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TraceThem | Public Profile Lookup</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b0b0d;
+      color: white;
+    }
+    .wrap {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .topbar {
+      padding: 10px 0 30px;
+      font-size: 28px;
+      font-weight: 800;
+    }
+    .accent { color: #4ea3ff; }
+    .hero {
+      text-align: center;
+      padding: 50px 0 30px;
+    }
+    .hero h1 {
+      font-size: 42px;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto 28px;
+      color: #b9c0cb;
       font-size: 18px;
-      color: #9fb7ff;
+      line-height: 1.6;
     }
-    #status {
-      font-size: 24px;
-      margin-top: 40px;
-      color: #4ea3ff;
+    .search-box {
+      max-width: 760px;
+      margin: 0 auto;
+      background: #14161b;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
     }
-    .progress {
-      width: 300px;
-      height: 10px;
-      background: #1b1f26;
-      border-radius: 20px;
-      margin: 40px auto;
-      overflow: hidden;
+    select, input {
+      background: #0f1115;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 16px;
     }
-    .bar {
-      height: 100%;
-      width: 0%;
+    select {
+      min-width: 180px;
+    }
+    input {
+      min-width: 280px;
+      flex: 1;
+    }
+    button {
       background: #4ea3ff;
-      transition: width 0.4s;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 14px 22px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .subnote {
+      text-align: center;
+      margin-top: 14px;
+      color: #8f98a8;
+      font-size: 14px;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-top: 60px;
+    }
+    .card {
+      background: #14161b;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 20px;
+    }
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+    .card p {
+      color: #b9c0cb;
+      line-height: 1.6;
+      margin: 0;
     }
   </style>
 </head>
 <body>
-  <h1>Running public-source scan...</h1>
-  <div id="query">Preparing search...</div>
+  <div class="wrap">
+    <div class="topbar">Trace<span class="accent">Them</span></div>
 
-  <div class="progress">
-    <div class="bar" id="bar"></div>
+    <div class="hero">
+      <h1>See what public profiles and digital clues are connected.</h1>
+      <p>
+        Search a phone number, email, or username and preview the types of public-source
+        signals a lookup tool can organize in one place.
+      </p>
+
+      <form class="search-box" action="scan.html" method="get">
+        <select name="type" required>
+          <option value="phone">Phone Number</option>
+          <option value="email">Email Address</option>
+          <option value="username">Username</option>
+        </select>
+
+        <input
+          type="text"
+          name="query"
+          placeholder="Enter phone number, email, or username"
+          required
+        />
+
+        <button type="submit">Start Search</button>
+      </form>
+
+      <div class="subnote">
+        Public-source demo only. No private account access. No hacking.
+      </div>
+    </div>
+
+    <div class="features">
+      <div class="card">
+        <h3>Possible Profile Matches</h3>
+        <p>Preview how a lookup tool can organize likely public-facing profile associations.</p>
+      </div>
+
+      <div class="card">
+        <h3>Username Reuse</h3>
+        <p>See how a repeated handle can appear across multiple public platforms and websites.</p>
+      </div>
+
+      <div class="card">
+        <h3>Public Mentions</h3>
+        <p>Surface possible public references tied to an email, number, or username.</p>
+      </div>
+
+      <div class="card">
+        <h3>Digital Footprint Summary</h3>
+        <p>Review results carefully and verify anything important against original public sources.</p>
+      </div>
+    </div>
   </div>
-
-  <div id="status">Initializing search...</div>
-
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const query = params.get("query") || "not provided";
-    const type = params.get("type") || "search";
-
-    document.getElementById("query").innerText = "Scanning " + type + ": " + query;
-
-    const steps = [
-      "Searching public sources...",
-      "Scanning social platforms...",
-      "Checking username reuse...",
-      "Reviewing public records...",
-      "Matching profile signals...",
-      "Signals detected"
-    ];
-
-    let i = 0;
-
-    function nextStep() {
-      document.getElementById("status").innerText = steps[i];
-      document.getElementById("bar").style.width = ((i + 1) * 16) + "%";
-      i++;
-
-      if (i < steps.length) {
-        setTimeout(nextStep, 1800);
-      } else {
-        setTimeout(function () {
-          window.location.href =
-            "results.html?type=" + encodeURIComponent(type) +
-            "&query=" + encodeURIComponent(query);
-        }, 1200);
-      }
-    }
-
-    setTimeout(nextStep, 1200);
-  </script>
 </body>
 </html>
