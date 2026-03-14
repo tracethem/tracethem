@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scanning...</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0b0b0d;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 120px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    #query {
+      font-size: 18px;
+      color: #9fb7ff;
+      margin-bottom: 30px;
+    }
+    #status {
+      font-size: 24px;
+      color: #4ea3ff;
+      margin-top: 30px;
+    }
+    .progress {
+      width: 300px;
+      height: 10px;
+      background: #1b1f26;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+    .bar {
+      height: 100%;
+      width: 0%;
+      background: #4ea3ff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Running public-source scan...</h1>
+  <div id="query">Preparing search...</div>
+
+  <div class="progress">
+    <div class="bar" id="bar"></div>
+  </div>
+
+  <div id="status">Initializing search...</div>
+
+  <script>
+    var params = new URLSearchParams(window.location.search);
+    var query = params.get("query") || "not provided";
+    var type = params.get("type") || "search";
+
+    document.getElementById("query").innerText = "Scanning " + type + ": " + query;
+
+    var steps = [
+      "Searching public sources...",
+      "Scanning social platforms...",
+      "Checking username reuse...",
+      "Reviewing public records...",
+      "Matching profile signals...",
+      "Signals detected"
+    ];
+
+    var i = 0;
+
+    function nextStep() {
+      document.getElementById("status").innerText = steps[i];
+      document.getElementById("bar").style.width = ((i + 1) * 16) + "%";
+      i++;
+
+      if (i < steps.length) {
+        setTimeout(nextStep, 1500);
+      } else {
+        setTimeout(function () {
+          window.location.href =
+            "results.html?type=" + encodeURIComponent(type) +
+            "&query=" + encodeURIComponent(query);
+        }, 1000);
+      }
+    }
+
+    setTimeout(nextStep, 1000);
+  </script>
+</body>
+</html>
